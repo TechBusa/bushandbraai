@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -878,7 +878,7 @@
         <i class="fa-brands fa-whatsapp text-2xl md:text-3xl"></i>
     </a>
 
-    <!-- NEW: Booking Modal -->
+    <!-- Booking Modal -->
     <div id="booking-modal" class="fixed inset-0 z-[100] hidden bg-stone-900/60 backdrop-blur-sm overflow-y-auto">
         <div class="min-h-screen flex items-center justify-center p-2 sm:p-4">
 
@@ -976,11 +976,12 @@
 
                             <div class="bg-white p-3 sm:p-4 rounded-xl border border-stone-100 shadow-sm">
                                 <p class="font-bold text-stone-900 mb-2 flex items-center gap-2 text-sm sm:text-base">
-                                    <i class="fa-solid fa-building-columns text-orange-500"></i> Bank Details
+                                    <i class="fa-solid fa-building-columns text-orange-500"></i> FNB Business Account
                                 </p>
                                 <div class="text-xs sm:text-sm space-y-1">
-                                    <p class="text-stone-600">PayShap: <strong class="text-stone-900">@capitec 071 742 9319</strong></p>
-                                    <p class="text-stone-600">Name: <strong class="text-stone-900">Ayanda Mahlangu</strong></p>
+                                    <p class="text-stone-600">Account Name: <strong class="text-stone-900">EMELDA SUPPLIES (PTY) LTD</strong></p>
+                                    <p class="text-stone-600">Account Number: <strong class="text-stone-900">63165178857</strong></p>
+                                    <p class="text-stone-600">Branch Code: <strong class="text-stone-900">250655</strong></p>
                                 </div>
                                 <div class="mt-3 bg-orange-50 text-orange-800 text-[10px] sm:text-xs px-2.5 py-2 rounded-lg font-medium border border-orange-100 leading-tight">
                                     <i class="fa-solid fa-circle-info mr-1"></i> Please use your First Name & Last Name as the reference.
@@ -988,17 +989,22 @@
                             </div>
                         </div>
 
-                        <!-- Submit -->
-                        <button type="button" onclick="submitBooking()" class="w-full bg-stone-900 text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-orange-600 transition-colors shadow-lg">
-                            Confirm & Send via WhatsApp
-                        </button>
+                        <!-- Submit Options -->
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button type="button" onclick="submitBooking()" class="flex-1 bg-[#25D366] text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-[#20bd5a] transition-colors shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                            </button>
+                            <button type="button" onclick="submitBookingEmail()" class="flex-1 bg-stone-900 text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-orange-600 transition-colors shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-envelope text-xl"></i> Email
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- NEW: Inquiry/Quote Modal -->
+    <!-- Inquiry/Quote Modal -->
     <div id="inquiry-modal" class="fixed inset-0 z-[100] hidden bg-stone-900/60 backdrop-blur-sm overflow-y-auto">
         <div class="min-h-screen flex items-center justify-center p-2 sm:p-4">
 
@@ -1068,10 +1074,15 @@
                             <textarea id="iq-message" rows="3" class="form-input resize-none" placeholder="Tell us about your team and what you are looking for in the event..."></textarea>
                         </div>
 
-                        <!-- Submit -->
-                        <button type="button" onclick="submitInquiry()" class="w-full bg-stone-900 text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-orange-600 transition-colors shadow-lg">
-                            Send Inquiry via WhatsApp
-                        </button>
+                        <!-- Submit Options -->
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button type="button" onclick="submitInquiry()" class="flex-1 bg-[#25D366] text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-[#20bd5a] transition-colors shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                            </button>
+                            <button type="button" onclick="submitInquiryEmail()" class="flex-1 bg-stone-900 text-white py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-orange-600 transition-colors shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-envelope text-xl"></i> Email
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -1161,7 +1172,6 @@
         }
 
         function submitBooking() {
-            // Get values
             const fname = document.getElementById('bf-fname').value.trim();
             const lname = document.getElementById('bf-lname').value.trim();
             const email = document.getElementById('bf-email').value.trim();
@@ -1178,15 +1188,37 @@
             const total = parseInt(hikers) * PRICE_PER_PERSON;
             const eventName = eventNameTarget.innerText;
 
-            // Construct WhatsApp Message
-            const message = `*Bush & Braai Booking Request* 🏕️🔥\n\n*Event:* ${eventName} (${currentEventDate})\n\n*Name:* ${fname} ${lname}\n*Email:* ${email}\n*Phone:* ${phone}\n\n*Hikers:* ${hikers} Person(s)\n*Dietary:* ${diet}\n*Drink Choice:* ${drink || 'Not Selected'}\n\n*Total Payable:* R${total}\n\n_I am ready to make the PayShap payment to @capitec 071 742 9319._`;
+            const message = `*Bush & Braai Booking Request* 🏕️🔥\n\n*Event:* ${eventName} (${currentEventDate})\n\n*Name:* ${fname} ${lname}\n*Email:* ${email}\n*Phone:* ${phone}\n\n*Hikers:* ${hikers} Person(s)\n*Dietary:* ${diet}\n*Drink Choice:* ${drink || 'Not Selected'}\n\n*Total Payable:* R${total}\n\n_I am ready to make the payment to the EMELDA SUPPLIES FNB account._`;
 
             const encodedMessage = encodeURIComponent(message);
             const targetPhone = "27717429319";
             const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedMessage}`;
 
-            // Open WhatsApp
             window.open(whatsappUrl, '_blank');
+            closeBookingModal();
+        }
+
+        function submitBookingEmail() {
+            const fname = document.getElementById('bf-fname').value.trim();
+            const lname = document.getElementById('bf-lname').value.trim();
+            const email = document.getElementById('bf-email').value.trim();
+            const phone = document.getElementById('bf-phone').value.trim();
+            const hikers = document.getElementById('bf-hikers').value;
+            const diet = document.getElementById('bf-diet').value;
+            const drink = document.getElementById('bf-drink').value;
+
+            if(!fname || !lname || !phone) {
+                alert("Please fill in your name and phone number to book.");
+                return;
+            }
+
+            const total = parseInt(hikers) * PRICE_PER_PERSON;
+            const eventName = eventNameTarget.innerText;
+
+            const subject = encodeURIComponent(`Booking Request: ${eventName} - ${fname} ${lname}`);
+            const body = encodeURIComponent(`Bush & Braai Booking Request 🏕️🔥\n\nEvent: ${eventName} (${currentEventDate})\n\nName: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone}\n\nHikers: ${hikers} Person(s)\nDietary: ${diet}\nDrink Choice: ${drink || 'Not Selected'}\n\nTotal Payable: R${total}\n\nI am ready to make the payment to the EMELDA SUPPLIES (PTY) LTD FNB account.`);
+            
+            window.location.href = `mailto:ayanda@bushandbraai.co.za?subject=${subject}&body=${body}`;
             closeBookingModal();
         }
 
@@ -1238,6 +1270,27 @@
             const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedMessage}`;
 
             window.open(whatsappUrl, '_blank');
+            closeInquiryModal();
+        }
+
+        function submitInquiryEmail() {
+            const fname = document.getElementById('iq-fname').value.trim();
+            const lname = document.getElementById('iq-lname').value.trim();
+            const company = document.getElementById('iq-company').value.trim();
+            const email = document.getElementById('iq-email').value.trim();
+            const phone = document.getElementById('iq-phone').value.trim();
+            const size = document.getElementById('iq-size').value;
+            const msg = document.getElementById('iq-message').value.trim();
+
+            if(!fname || !lname || !phone) {
+                alert("Please fill in your name and phone number to inquire.");
+                return;
+            }
+
+            const subject = encodeURIComponent(`Corporate Inquiry: ${company || fname + ' ' + lname}`);
+            const body = encodeURIComponent(`Bush & Braai Corporate Inquiry 🏢🔥\n\nName: ${fname} ${lname}\nCompany: ${company || 'N/A'}\nEmail: ${email}\nPhone: ${phone}\nTeam Size: ${size}\n\nMessage/Requirements:\n${msg || 'No additional details provided.'}`);
+            
+            window.location.href = `mailto:ayanda@bushandbraai.co.za?subject=${subject}&body=${body}`;
             closeInquiryModal();
         }
     </script>
